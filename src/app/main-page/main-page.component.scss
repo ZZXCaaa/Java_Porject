@@ -1,0 +1,28 @@
+.BG_class
+{
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background-color: bisque;
+  .main_meun_class
+  {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 100px;
+    left: 100px;
+    height: 500px;
+    width: 300px;
+    background-color: #fff;
+
+  }
+
+}
+.button_Text
+{
+  height: 50px;
+  width: 100px;
+  margin-top: 50px;
+
+}

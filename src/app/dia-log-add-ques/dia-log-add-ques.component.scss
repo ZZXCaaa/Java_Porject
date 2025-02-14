@@ -1,0 +1,49 @@
+.title
+{
+  text-align: center;
+}
+.dio_meun
+{
+  h2
+  {
+    margin-left: 10px;
+  }
+}
+.input-quizName
+{
+  margin-left: 10px;
+  height: 20px;
+}
+.input-quizDesc
+{
+  margin-left: 10px;
+  height: 100px;
+  width: 200px;
+}
+
+
+/* 样式设置 */
+.tabs {
+  display: flex;
+  cursor: pointer;
+}
+.tab {
+  padding: 10px;
+  margin-right: 5px;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.tab.active {
+  background-color: #4CAF50;
+  color: white;
+}
+.tab-content {
+  display: none;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #ccc;
+}
+.tab-content.active {
+  display: block;
+}

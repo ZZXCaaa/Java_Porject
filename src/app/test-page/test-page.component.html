@@ -1,0 +1,25 @@
+<p>純粹的假資料</p>
+<h2>{{tutorial_}}</h2>
+<h4>{{tutorial_}}</h4>
+@for (item of user_data; track $index)
+ {
+    <h4>*旅客姓名&nbsp; :&nbsp; {{item.name}}</h4>
+    <h4>*手機號碼  :&nbsp; {{item.phone}} </h4>
+    <h4>電子郵件 :&nbsp; {{item.email}}</h4>
+    <h4>*人數:&nbsp;{{item.people}}</h4>
+ }
+ <li>
+  <h4>*餐點選擇</h4>
+  <ul>{{chose_}}</ul>
+</li>
+<li>
+  <h4>*提供餐點時段</h4>
+  @for (item of button_click_; track $index)
+  {
+    <ul>{{item}}</ul>
+  }
+</li>
+<li>
+  <h4>*餐點</h4>
+  <ul>{{meal_}}</ul>
+</li>

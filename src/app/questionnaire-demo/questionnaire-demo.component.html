@@ -1,0 +1,52 @@
+<p>純粹的假資料</p>
+<div class="ques_bg">
+    <div class="ques_title">
+        <h2>{{ques_tutle}}</h2>
+        <div class="ques_desc">
+          <h4>{{ques_tutle_content}}</h4>
+        </div>
+        <div class="ques_desc_2">
+          <div class="ques_text">
+            <h4>*旅客姓名&nbsp; :&nbsp; <input type="text" name="" id="" [(ngModel)]="user_data[0].name"></h4>
+            <h4>*手機號碼  :&nbsp;  <input type="text" name="" id="" [(ngModel)]="user_data[0].phone" ></h4>
+            <h4>電子郵件 :&nbsp; <input type="text" name="" id="" [(ngModel)]="user_data[0].email"></h4>
+
+            <div style="margin-left: -30px;">
+              <ol>
+                <li><h4>*人數
+                  <select name="room" id="" [(ngModel)]="user_data[0].people"(change)="other_value()">
+                    <option value="1">單人</option>
+                    <option value="2">雙人</option>
+                    <option value="3">三人</option>
+                    <option value="4">四人</option>
+                    <option value="其他" >以上</option>
+                  </select>
+                </h4></li>
+                @if (is_other)
+                {
+                  其他 :&nbsp;<input type="text" name="" id="text_people" (keyup)="other_value()" [(ngModel)]="user_data[0].people" placeholder="請填寫數字">
+                }
+                <li><h4>*餐點選擇</h4></li>
+                <input type="radio" name="meals" id=""(click)="click_button('西餐',0)"> 西餐
+                <input type="radio" name="meals" id=""(click)="click_button('中式',0)"> 中式
+                <input type="radio" name="meals" id=""(click)="click_button('日式',0)"> 日式
+                <li><h4>提供餐點時段</h4></li>
+                <input type="checkbox" name="Meal_times_available" id="" [(ngModel)]="button_click[0]" (change)="cons_LOG()">早餐
+                <input type="checkbox" name="Meal_times_available" id="" [(ngModel)]="button_click[1]" (change)="cons_LOG()">午餐
+                <input type="checkbox" name="Meal_times_available" id="" [(ngModel)]="button_click[2]" (change)="cons_LOG()">晚餐
+                <input type="checkbox" name="Meal_times_available" id="" [(ngModel)]="button_click[3]" (change)="cons_LOG()">宵夜
+                <li><h4>*餐點</h4></li>
+                <input type="radio" name="meal" id="" (click)="click_button('葷',1)"> 葷
+                <input type="radio" name="meal" id="" (click)="click_button('素',1)"> 素
+                <input type="radio" name="meal" id=""(click)="click_button('蛋奶素',1)"> 蛋奶素
+              </ol>
+            </div>
+            <div>
+              <button (click)="preview(false)">預覽</button>
+              <button (click)="preview(true)">送出</button>
+            </div>
+        </div>
+       </div>
+</div>
+
+

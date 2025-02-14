@@ -1,0 +1,15 @@
+Go to Component
+<!-- dialog content -->
+<h2 mat-dialog-title>管理者登入</h2>
+<!-- dialog content -->
+<mat-dialog-content>
+  <h3>帳號&nbsp; :&nbsp; <input type="text" name="" id=""[(ngModel)]="account_number_user"></h3>
+  <h3>密碼&nbsp; :&nbsp; <input type="password" name="" id="" [(ngModel)]="password_number_user"></h3>
+</mat-dialog-content>
+<!-- dialog button -->
+<mat-dialog-actions>
+<button (click)="on_loding_click(false)">Cancel</button>
+<button (click)="on_loding_click(true)">OK</button>
+</mat-dialog-actions>
+
+
