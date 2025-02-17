@@ -1,7 +1,8 @@
+
 <div class="mat_tab">
   <h1 mat-dialog-title class="title">新增問卷</h1>
-<mat-tab-group>
-  <mat-tab label="First">
+<mat-tab-group id="tabs" selectedIndex= {{tabIndex}} (selectedIndexChange)="on_loding_click($event)" >
+  <mat-tab label="創建問卷">
     <div class="dio_meun">
       <h2>問卷名稱 :
         <input type="text" class="input-quizName" [(ngModel)]="inputquizName" (change)="testTEXT()">
@@ -12,14 +13,40 @@
       <h2>開始日期 : <input type="date" name="" id=""></h2>
       <h2>結束日期 : <input type="date" name="" id=""></h2>
     </div>
-    <button mat-button (click)="on_loding_click(false)">取消</button>
-    <button mat-button (click)="on_loding_click(true)" class="button">下一步</button>
     </mat-tab>
+  <mat-tab label="新增問題">
+    <div class="dio_meun">
+      <ol class="olTextSize">
+        <li>
+      <h4>問題名稱 :
+        <input type="text" class="input-quizName" [(ngModel)]="inputquizName" (change)="testTEXT()">
+      </h4>
+      <div class="Bottom_Line">
+        <div class="input-ques">
+          <h4>問題類型 :
+          <select name="" id="" class="select-type">
+            <option value="">單選題</option>
+            <option value="">複選題</option>
+            <option value="">填空題</option>
+          </select>
+        </h4>
+        <h5>必塡 <input type="checkbox" name="" id=""></h5>
+       </div>
+      </div>
+    </li>
+  </ol>
+    </div>
+  </mat-tab>
 
-  <mat-tab label="Second"> Content 2 </mat-tab>
 
-  <mat-tab label="Third"> Content 3 </mat-tab>
+  <mat-tab label="預覽">
+    Content 3
+
+  </mat-tab>
+
 </mat-tab-group>
+<button mat-button (click)="on_click(-1)" class="button_left">{{buttonName_1}}</button>
+<button mat-button (click)="on_click(1)" class="button_right">{{buttonName}}</button>
 </div>
 <!-- <mat-dialog-content>
       <div class="dio_meun">

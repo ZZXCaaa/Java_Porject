@@ -243,7 +243,8 @@ export class ActivityComponent
         break;
       case 2:
        // this.dialogService.open(DiaLogAddQuesComponent, { header: 'Select a Product'});
-        this.ref = this.dialogService.open(DiaLogAddQuesComponent, {data:{name:"administrator" ,animate:"animate"}});
+
+       this.ref = this.dialogService.open(DiaLogAddQuesComponent, {data:{name:"administrator" ,animate:"animate"}});
         //this.dialog.open(DiaLogAddQuesComponent);
         //const dialogAddQues = this.dialog.open(DiaLogAddQuesComponent,{data:{name:"administrator" ,animate:"animate"},width:"500px",height:"500px"});
         //dialogAddQues.afterClosed().subscribe();

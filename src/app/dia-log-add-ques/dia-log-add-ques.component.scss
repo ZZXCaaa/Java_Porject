@@ -14,6 +14,11 @@
   margin-left: 10px;
   height: 20px;
 }
+.input-quesName
+{
+  margin-left: 10px;
+  height: 20px;
+}
 .input-quizDesc
 {
   margin-left: 10px;
@@ -53,8 +58,42 @@
   width: 500px;;
   height:500px;
   border-radius: 15px;
+  position: relative;
 }
-.button
+.button_right
 {
-
+  position: absolute;
+  right: 10%;
+  bottom: 10%;
+}
+.button_left
+{
+  position: absolute;
+  left: 10%;
+  bottom: 10%;
+}
+.Bottom_Line
+{
+  border-bottom: #250202 1px solid;
+}
+.input-ques
+{
+  display: flex;
+  margin-top: -40px;
+  margin-left: 15px;
+  //justify-content: center;
+  //align-items: center;
+ .h5
+ {
+  text-align: top;
+ }
+}
+.select-type
+{
+  height: 20px;
+  width: 150px;
+}
+.olTextSize
+{
+  font-size: 20px;
 }
