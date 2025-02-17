@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import {AfterViewInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgModel } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router, RouterEvent, RouterLink, RouterLinkActive } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -13,12 +13,24 @@ import { ApiService } from '../Http_Severice_API/Api';
 import { DiaLogAddQuesComponent } from '../dia-log-add-ques/dia-log-add-ques.component';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { NgClass } from '@angular/common';
+
 
 
 @Component({
   selector: 'app-activity',
+  standalone: true,
+  imports:
+  [
+    MatTableModule,
+    MatPaginatorModule ,
+    FormsModule,
+    CommonModule,
+    RouterLink,
+    RouterLinkActive,
+    NgClass,
+  ],
   providers: [DialogService],
-  imports: [MatTableModule, MatPaginatorModule ,FormsModule,CommonModule,RouterLink,RouterLinkActive ],
   templateUrl: './activity.component.html',
   styleUrl: './activity.component.scss',
 
@@ -26,11 +38,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 export class ActivityComponent
 {
 
-  constructor(private router:Router ,
-   private http:ApiService,
-  public dialogService: DialogService){
-
-  }
+  constructor(private router:Router ,private http:ApiService,public dialogService: DialogService){ };
   readonly dialog  =inject(MatDialog);
   administrator_str :string = "會員";
   administrator_bool :boolean = false;
@@ -235,7 +243,7 @@ export class ActivityComponent
         break;
       case 2:
        // this.dialogService.open(DiaLogAddQuesComponent, { header: 'Select a Product'});
-        this.ref = this.dialogService.open(DiaLogAddQuesComponent, { header: 'Select a Product'});
+        this.ref = this.dialogService.open(DiaLogAddQuesComponent, {data:{name:"administrator" ,animate:"animate"}});
         //this.dialog.open(DiaLogAddQuesComponent);
         //const dialogAddQues = this.dialog.open(DiaLogAddQuesComponent,{data:{name:"administrator" ,animate:"animate"},width:"500px",height:"500px"});
         //dialogAddQues.afterClosed().subscribe();

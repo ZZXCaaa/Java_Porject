@@ -8,20 +8,27 @@ MatDialogRef, MAT_DIALOG_DATA,
 MatDialog} from '@angular/material/dialog';
 import { from, Subject } from 'rxjs';
 import {MatTabsModule} from '@angular/material/tabs';
-import {  DynamicDialogRef } from 'primeng/dynamicdialog'
+import {  DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog'
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-dia-log-add-ques',
-  imports: [FormsModule, MatDialogTitle, MatDialogContent, MatDialogActions, ActivityComponent,MatTabsModule],
+  imports: [
+    FormsModule,
+    MatDialogTitle,
+     MatDialogContent,
+     MatDialogActions,
+     ActivityComponent,
+     MatTabsModule,
+     CommonModule],
   templateUrl: './dia-log-add-ques.component.html',
   styleUrl: './dia-log-add-ques.component.scss'
 })
-export class DiaLogAddQuesComponent
+export class DiaLogAddQuesComponent implements AfterViewInit
 {
-  ref: DynamicDialogRef | undefined;
-  readonly dialog_ref = inject(MatDialogRef<DiaLogAddQuesComponent>);
 
-  readonly data = inject(MAT_DIALOG_DATA);
   @ViewChild(ActivityComponent) active!: ActivityComponent;
+  // readonly dialog_ref = inject(MatDialogRef<DiaLogAddQuesComponent>);
+  // readonly data = inject(MAT_DIALOG_DATA);
   inputquizName!:string;
   inputquizDesc!:string;
   subject = new Subject<ActivityComponent>();
@@ -29,10 +36,11 @@ export class DiaLogAddQuesComponent
    tabs = document.querySelectorAll('.tab');
    contents = document.querySelectorAll('.tab-content');
    selectedIndex: number = 2;
- ngAfterViewInit(): void {
-  //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-  //Add 'implements AfterViewInit' to the class.
-   //this.active.administrator();
+   constructor( public ref: DynamicDialogRef,
+                public config: DynamicDialogConfig){}
+ ngAfterViewInit(): void
+ {
+
  }
  ngOnInit() {
   setTimeout(() => this.selectedIndex = 1, 100)
@@ -40,17 +48,13 @@ export class DiaLogAddQuesComponent
   on_not_click():void
   {
     let retirn_data = ['status','not_click'];
-    this.dialog_ref.close(retirn_data);
+    //this.dialog_ref.close(retirn_data);
   }
 
-  on_loding_click(bool : boolean):void
-  {
-    if(!bool)
-    {
-      this.on_not_click();
-    }
-
-  }
+  // on_loding_click():void
+  // {
+    // this.ref.close({ status: 'not_click' });
+  // }
   testTEXT():void
   {
     console.log(this.inputquizName);
@@ -58,5 +62,12 @@ export class DiaLogAddQuesComponent
   }
   on_click():void
   {
+
+  }
+  on_loding_click(bool: boolean): void {
+    if (!bool)
+    {
+      this.on_not_click();
+    }
   }
 }

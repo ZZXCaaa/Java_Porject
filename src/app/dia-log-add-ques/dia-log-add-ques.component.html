@@ -1,10 +1,26 @@
-<h1 mat-dialog-title class="title">新增問卷</h1>
-<mat-tab-group [selectedIndex]="selectedIndex">
-  <mat-tab label="First"> Content 1 </mat-tab>
+<div class="mat_tab">
+  <h1 mat-dialog-title class="title">新增問卷</h1>
+<mat-tab-group>
+  <mat-tab label="First">
+    <div class="dio_meun">
+      <h2>問卷名稱 :
+        <input type="text" class="input-quizName" [(ngModel)]="inputquizName" (change)="testTEXT()">
+      </h2>
+      <h2>問卷描述 :
+        <textarea class="input-quizDesc" [(ngModel)]="inputquizDesc" (change)="testTEXT()"></textarea>
+      </h2>
+      <h2>開始日期 : <input type="date" name="" id=""></h2>
+      <h2>結束日期 : <input type="date" name="" id=""></h2>
+    </div>
+    <button mat-button (click)="on_loding_click(false)">取消</button>
+    <button mat-button (click)="on_loding_click(true)" class="button">下一步</button>
+    </mat-tab>
+
   <mat-tab label="Second"> Content 2 </mat-tab>
+
   <mat-tab label="Third"> Content 3 </mat-tab>
 </mat-tab-group>
-
+</div>
 <!-- <mat-dialog-content>
       <div class="dio_meun">
         <h2>問卷名稱 :
