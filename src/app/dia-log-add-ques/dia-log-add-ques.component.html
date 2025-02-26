@@ -10,37 +10,128 @@
       <h2>問卷描述 :
         <textarea class="input-quizDesc" [(ngModel)]="inputquizDesc" (change)="testTEXT()"></textarea>
       </h2>
-      <h2>開始日期 : <input type="date" name="" id=""></h2>
-      <h2>結束日期 : <input type="date" name="" id=""></h2>
+      <h2>開始日期 : <input type="date" name="" id="" [(ngModel)]="StartDate"(change)="testTEXT()" min={{minStartDate}}></h2>
+      <h2>結束日期 : <input type="date" name="" id=""[(ngModel)]="endDate"(change)="testTEXT()"    min={{StartDate}}></h2>
     </div>
     </mat-tab>
+
   <mat-tab label="新增問題">
     <div class="dio_meun">
-      <ol class="olTextSize">
-        <li>
-      <h4>問題名稱 :
-        <input type="text" class="input-quizName" [(ngModel)]="inputquizName" (change)="testTEXT()">
-      </h4>
-      <div class="Bottom_Line">
-        <div class="input-ques">
-          <h4>問題類型 :
-          <select name="" id="" class="select-type">
-            <option value="">單選題</option>
-            <option value="">複選題</option>
-            <option value="">填空題</option>
-          </select>
-        </h4>
-        <h5>必塡 <input type="checkbox" name="" id=""></h5>
-       </div>
+      <div class="ques_table" id="ques_table">
+        <ol class="olTextSize">
+            <li *ngFor="let item of inputQuesAll; let i = index">
+              <h4>問題名稱 :
+                <input type="text" class="input-quizName" [(ngModel)]="inputquesName[i]" (change)="testTEXT()">
+              </h4>
+              <div class="Bottom_Line">
+                <div class="input-ques">
+                  <h4>問題類型 :
+                  <select name="" id="" class="select-type"[(ngModel)]="inputquesType[i]" (change)="testTEXT()">
+                    <option value="Single">單選題</option>
+                    <option value="Multi"> 複選題</option>
+                    <option value="Text">  填空題</option>
+                  </select>
+                  @if (item.quesType == "Single"||item.quesType == "Multi")
+                   {
+                    @for (item of inputQuesAll[i].inputquesoption; track $index; let j = $index)
+                     {
+                      <ul>
+                        <li>
+                          <div class="input_option">
+                            <h6>選項題目: <input type="text" name="" id="" [(ngModel)]="inputQuesAll[i].inputquesoption[j]" (change)="testTEXT()"></h6>
+                            <input type="button" value="刪除" class="button_option_D" (click)="delete_input_ques_option(i,j)">
+                          </div>
+                        </li>
+                      </ul>
+                      }
+                      <div>
+                        <input type="button" value="新增"(click)="Add_input_ques_option(i)">
+                      </div>
+                   }
+                   <!-- @else if (item.quesType == "Text")
+                   {
+                    <input type="text" name="" id="">
+                   } -->
+                </h4>
+                <div class="Bottom_Line_2">
+                  <h5>必塡 <input type="checkbox" name="" id=""[(ngModel)]="inputquespublished[i]" (change)="testTEXT()"></h5>
+                  <button mat-button (click)="delete_input_ques(i)" class="button_right_D">刪除</button>
+                </div>
+               </div>
+              </div>
+            </li>
+            <button mat-button (click)="Add_input_ques()" class="button_left_A">新增</button>
+      <!-- -------------------------------------------------- -->
+    </ol>
       </div>
-    </li>
-  </ol>
     </div>
   </mat-tab>
 
 
   <mat-tab label="預覽">
-    Content 3
+
+    <div class="dio_meun">
+      <div class="ques_table" id="ques_table">
+        <div class="titlePreview"> <h2>{{inputquizName}}</h2></div>
+          <div class="DescPreview"><h2> {{inputquizDesc}}</h2></div>
+        <h2>開始日期 : {{StartDate}}</h2>
+        <h2>結束日期 : {{endDate}}</h2>
+        <ol class="olTextSize">
+
+            @for (item of inputQuesAll; track $index;let i = $index)
+            {
+              <li>
+                  <div style="display: flex;">
+                    <h3>{{item.quesName}}</h3>
+                      @switch (item.quesType)
+                       {
+                        @case ("Single")
+                        {
+                          <h3>(單選題)</h3>
+                        }
+                        @case ("Multi")
+                         {
+                          <h3>(多選題)</h3>
+                         }
+                         @case ("Text")
+                         {
+                          <h3>(簡答題)</h3>
+                         }
+                       }
+                    @if (item.quespublished)
+                    {
+                      <h3 style="color: rgb(176, 0, 0);">*</h3>
+                    }
+                  </div>
+                </li>
+                @if (item.quesType != "Text")
+                {
+                @for (items of item.inputquesoption; track $index)
+                {
+
+                    <ul style="margin-top: -30px;">
+                      <li>
+                        <div>
+                          <h6>{{items}}</h6>
+                        </div>
+                      </li>
+                    </ul>
+                }
+              }
+                @else
+                {
+
+                 <ul style="margin-top: -20px;">
+                   <li>
+                     <div style="height: 100px; width: 80%; padding: 10px; border: 2px solid #000000; border-radius: 5px;">
+                     </div>
+                   </li>
+                 </ul>
+                }
+               }
+        </ol>
+    </div>
+  </div>
 
   </mat-tab>
 

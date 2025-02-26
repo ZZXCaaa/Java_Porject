@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs';
 import { Component, inject } from '@angular/core';
 import {AfterViewInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
@@ -44,8 +45,18 @@ export class ActivityComponent
   administrator_bool :boolean = false;
   number_track :number = 0;
   sc_name !:string
+  startdate!:Date
+  endDate!:Date
   ref: DynamicDialogRef | undefined;
   mouse_enter_bool :boolean = false;
+  sc_date = {};
+  serviceDate = [{
+    name:"",
+    startDate:Date,
+    endDate:Date,
+    state:false,
+    id:0,
+  },];
   activeData =
   [
     {
@@ -67,117 +78,130 @@ export class ActivityComponent
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    this.for_activeData(0);
-    this.http.getApi("http://localhost:8080/quiz/get_all_quiz").subscribe(
-    (res:any)=>{console.log(res)});
+    //this.for_activeData(0);
+    this.http.postAPI("http://localhost:8080/quiz/get_quiz",this.sc_date).subscribe(
+    (res:any)=>{
+      console.log(res);
+      let year:number = Number(new Date().getFullYear.toString);
+      let month:number = Number(new Date().getMonth.toString)+1;
+      let day:number = Number(new Date().getDate.toString);
+      this.serviceDate =res.quizList;
+        // if(new Date().getDate()>res.startDate.getDate()&&new Date().getDate()<res.endDate.getDate())
+        // {
+        //   this.serviceDate[i].state = true;
+        // }
+       // if()
+        // console.log(this.serviceDate[i].startDate);
+        // console.log(this.serviceDate[i].endDate);
+      //console.log(this.serviceDate);
+    });
   }
 
-  for_activeData(for_number: number)
-  {
-    this.for_src = [];
+  // for_activeData(for_number: number)
+  // {
+  //   this.for_src = [];
 
-    this.activeData = [];
-    let activeData_for =
-    [
-      {
-        pos : '高雄鳳山',
-        name : '釣魚',
-        date : '2024/5/10',
-        state: '進行中',
-      },
-      {
-        pos : '嘉義民雄',
-        name : '遊樂園',
-        date : '2024/5/11',
-        state: '已結束',
-      },
-      {
-        pos : '嘉義市',
-        name : '爬山',
-        date : '2024/5/12',
-        state: '進行中',
-      },
-      {
-        pos : '高雄燕巢',
-        name : '開車',
-        date : '2024/5/13',
-        state: '進行中',
-      },
-      {
-        pos : '嘉義青埔',
-        name : '開車',
-        date : '2024/5/14',
-        state: '進行中',
-      },
-      {
-        pos : '高雄左營',
-        name : '開車',
-        date : '2024/5/15',
-        state: '已結束',
-      },
-      {
-        pos : '嘉義民雄',
-        name : '開車',
-        date : '2024/5/16',
-        state: '已結束',
-      },
-      {
-        pos : '嘉義民雄',
-        name : '開車',
-        date : '2024/5/17',
-        state: '已結束',
-      },
-      {
-        pos : '嘉義民雄',
-        name : '開車',
-        date : '2024/5/18',
-        state: '已結束',
-      },
-    ];
-    this.number_track = this.number_track+for_number;
-    if(this.number_track+5 >=activeData_for.length)
-    {
-      this.number_track = activeData_for.length-5;
-      console.log("over");
-    }
-    else if(this.number_track <0)
-    {
-      this.number_track = 0;
-      console.log("no");
-    }
-        for(let i =this.number_track ; i < activeData_for.length; i++)
-        {
-          if(!this.sc_name&&this.activeData.length<5)
-          {
-            this.activeData.push(activeData_for[i]);
-            console.log(this.sc_name);
-          }
-          else
-          {
+  //   this.activeData = [];
+  //   let activeData_for =
+  //   [
+  //     {
+  //       pos : '高雄鳳山',
+  //       name : '釣魚',
+  //       date : '2024/5/10',
+  //       state: '進行中',
+  //     },
+  //     {
+  //       pos : '嘉義民雄',
+  //       name : '遊樂園',
+  //       date : '2024/5/11',
+  //       state: '已結束',
+  //     },
+  //     {
+  //       pos : '嘉義市',
+  //       name : '爬山',
+  //       date : '2024/5/12',
+  //       state: '進行中',
+  //     },
+  //     {
+  //       pos : '高雄燕巢',
+  //       name : '開車',
+  //       date : '2024/5/13',
+  //       state: '進行中',
+  //     },
+  //     {
+  //       pos : '嘉義青埔',
+  //       name : '開車',
+  //       date : '2024/5/14',
+  //       state: '進行中',
+  //     },
+  //     {
+  //       pos : '高雄左營',
+  //       name : '開車',
+  //       date : '2024/5/15',
+  //       state: '已結束',
+  //     },
+  //     {
+  //       pos : '嘉義民雄',
+  //       name : '開車',
+  //       date : '2024/5/16',
+  //       state: '已結束',
+  //     },
+  //     {
+  //       pos : '嘉義民雄',
+  //       name : '開車',
+  //       date : '2024/5/17',
+  //       state: '已結束',
+  //     },
+  //     {
+  //       pos : '嘉義民雄',
+  //       name : '開車',
+  //       date : '2024/5/18',
+  //       state: '已結束',
+  //     },
+  //   ];
+  //   this.number_track = this.number_track+for_number;
+  //   if(this.number_track+5 >=activeData_for.length)
+  //   {
+  //     this.number_track = activeData_for.length-5;
+  //     console.log("over");
+  //   }
+  //   else if(this.number_track <0)
+  //   {
+  //     this.number_track = 0;
+  //     console.log("no");
+  //   }
+  //       for(let i =this.number_track ; i < activeData_for.length; i++)
+  //       {
+  //         if(!this.sc_name&&this.activeData.length<5)
+  //         {
+  //           this.activeData.push(activeData_for[i]);
+  //           console.log(this.sc_name);
+  //         }
+  //         else
+  //         {
 
-            if(activeData_for[i].date.indexOf(this.sc_name)!=-1 || activeData_for[i].name.indexOf(this.sc_name)!=-1||activeData_for[i].pos.indexOf(this.sc_name)!=-1 )
-            {
-              if( this.activeData.length<5)
-              {
-                console.log(this.sc_name);
-                this.for_src.push(activeData_for[i]);
-                console.log( this.for_src);
-              }
-            }
-          }
-        }
-        if(this.sc_name)
-        {
-          for(let j =this.number_track ;j< this.for_src.length && this.activeData.length<5 ; j++)
-            {
-              this.activeData.push(this.for_src[j]);
-            }
-        }
-  }
+  //           if(activeData_for[i].date.indexOf(this.sc_name)!=-1 || activeData_for[i].name.indexOf(this.sc_name)!=-1||activeData_for[i].pos.indexOf(this.sc_name)!=-1 )
+  //           {
+  //             if( this.activeData.length<5)
+  //             {
+  //               console.log(this.sc_name);
+  //               this.for_src.push(activeData_for[i]);
+  //               console.log( this.for_src);
+  //             }
+  //           }
+  //         }
+  //       }
+  //       if(this.sc_name)
+  //       {
+  //         for(let j =this.number_track ;j< this.for_src.length && this.activeData.length<5 ; j++)
+  //           {
+  //             this.activeData.push(this.for_src[j]);
+  //           }
+  //       }
+  // }
   //判定是否過期(尚未實現)
   data_over(data :any)
   {
-
   }
   //跳轉假資料
   meun_button_click(data :any)
@@ -240,11 +264,14 @@ export class ActivityComponent
       case 1:
         const dialogRef = this.dialog.open(DiologAdministratorComponent,{data:{name:"administrator" ,animate:"animate"},width:"500px",height:"300px"});
         dialogRef.afterClosed().subscribe(result =>this.administrator());
+
         break;
       case 2:
        // this.dialogService.open(DiaLogAddQuesComponent, { header: 'Select a Product'});
 
        this.ref = this.dialogService.open(DiaLogAddQuesComponent, {data:{name:"administrator" ,animate:"animate"}});
+       this.ref.onClose.subscribe(result=>this.search_data());
+        // this.ref.close().subscribe(result =>this.administrator())
         //this.dialog.open(DiaLogAddQuesComponent);
         //const dialogAddQues = this.dialog.open(DiaLogAddQuesComponent,{data:{name:"administrator" ,animate:"animate"},width:"500px",height:"500px"});
         //dialogAddQues.afterClosed().subscribe();
@@ -257,13 +284,37 @@ export class ActivityComponent
     this.administrator_str = "會員";
     this.administrator_bool = false;
   }
-  delata_data()
+  delata_data(value:number)
   {
-
+    console.log(value);
+    console.log(this.serviceDate[value].id);
+    let deleteId ={quizIdList:[1]};
+    //deleteId[0] =this.serviceDate[value].id;
+    deleteId.quizIdList[0] = this.serviceDate[value].id;
+    console.log(deleteId);
+    this.http.postAPI("http://localhost:8080/quiz/delete",deleteId).subscribe
+    (resuli=> this.search_data());
   }
   click_tool_bar()
   {
     let sethight = document.getElementById("option_main") as HTMLElement;
     sethight.style.height = "200px";
+  }
+  search_data( )
+  {
+    this.sc_date = {
+      name:this.sc_name,
+      starLocalDate:this.startdate,
+      endDate:this.endDate,
+    }
+
+    //console.log(this.sc_date);
+    this.http.postAPI("http://localhost:8080/quiz/get_quiz",this.sc_date).subscribe(
+      (res:any)=>
+        {
+
+          console.log(res);
+          this.serviceDate = res.quizList;
+        })
   }
 }

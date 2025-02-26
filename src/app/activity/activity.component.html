@@ -9,6 +9,7 @@
     <div class="option1">
       <input type="button" value="新增問卷" class="opt_button" (click)="showDialog(2)">
 
+      <!-- <input type="button" value="編輯問卷" class="edit_button" (click)="showDialog(2)"> -->
     </div>
     <div class="option1"></div>
     <div class="option1"></div>
@@ -19,7 +20,7 @@
       @if (administrator_bool)
       {
         <button>新增</button>
-        <button (click)="delata_data()" >刪除</button>
+        <!-- <button (click)="delata_data()" >刪除</button> -->
         <button (click)="sign_out()">登出</button>
       }
 
@@ -37,20 +38,21 @@
               <th class="start_time">開始時間</th>
               <th class="end_time">結束時間</th>
               <th class="static">狀態</th>
-              <button class="botton_Z_push" (click)="for_activeData(5)">前進</button>
-              <button class="botton_Z_push_2" (click)="for_activeData(-4)">後退</button>
+              <button class="botton_Z_push" >前進</button>
+              <button class="botton_Z_push_2" >後退</button>
           </tr>
         </thead>
 
-          @for (item of activeData; track $index)
+          @for (item of serviceDate; track $index ; let i = $index)
           {
 
             <div class="text_all" [ngClass]="meun_button_class()" (click)="meun_button_click(item)" (mouseenter)="mouse_enter(item)" (mousedown)="mouse_enter(item)" id={{item}}>
-              <td><input class="pitcer" type="image" src="/imag_1.png" alt=""></td>
-              <td class="td_goleft name_break">{{item.date}}zzzzzzzzzzzzzzzz</td>
-              <td class="td_goleft">{{item.name}}</td>
-              <td class="td_goleft">{{item.state}}</td>
-              <td class="td_goleft">{{item.pos}}</td>
+              <td><input type="button" value="刪除" (click)="delata_data(i)"></td>
+              <!-- <td><input class="pitcer" type="image" src="/imag_1.png" alt=""></td> -->
+              <td class="td_goleft name_break">{{item.name}}</td>
+              <td class="td_goleft">{{item.startDate}}</td>
+              <td class="td_goleft">{{item.endDate}}</td>
+              <td class="td_goleft">{{item}}</td>
             <p></p>
             </div>
 
@@ -58,11 +60,11 @@
       </div>
     </table>
     <div class="botton_class">
-      <input type="text" name="" id="" [(ngModel)]="sc_name" (keyup)="for_activeData(0)" class="sc">
+      <input type="text" name="" id="" [(ngModel)]="sc_name" (keyup)="search_data()"  class="sc">
     </div>
     <div> <h1 class="h1_title">{{administrator_str}}</h1></div>
-    <div><input type="date" name="" id="" class="date_start"></div>
-    <div><input type="date" name="" id="" class="date_end"></div>
+    <div><input type="date" name="" id="" class="date_start" (change)="search_data()" [(ngModel)]="startdate"></div>
+    <div><input type="date" name="" id="" class="date_end" (change)="search_data()" [(ngModel)]="endDate"></div>
     </div>
 </div>
 

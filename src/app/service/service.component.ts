@@ -1,5 +1,6 @@
 
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceComponent
@@ -10,4 +11,10 @@ export class ServiceComponent
   meal_!:string
   ques_tutle_!:string
   ques_tutle_content!:string
+  chick:boolean = false;
+
+  value = new Subject<any>;
+
+
 }
+

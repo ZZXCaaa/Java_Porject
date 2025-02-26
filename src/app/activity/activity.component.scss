@@ -233,3 +233,13 @@ th
   //overflow-wrap: break-word;
   word-break: break-all;
 }
+.edit_button
+{
+  position: absolute;
+  top: 30%;
+  left: -2.5%;
+  height: 50px;
+  width: 100px;
+  border-radius: 10%;
+  background-color: white;
+}
